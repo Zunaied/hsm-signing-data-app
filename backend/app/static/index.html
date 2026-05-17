@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 
 <head>
@@ -68,4 +68,38 @@
 
 </body>
 
+</html> -->
+
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>HSM Signing App</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+
+<body>
+
+<div class="container">
+
+    <h1>HSM Signing System</h1>
+
+    <input id="name" placeholder="Name">
+    <input id="email" placeholder="Email">
+
+    <input id="signature" placeholder="Signature">
+
+    <div class="buttons">
+        <button onclick="signData()">SIGN</button>
+        <button onclick="verifyData()">VERIFY</button>
+    </div>
+
+    <div id="statusBox">Ready</div>
+
+</div>
+
+<script src="/static/app.js"></script>
+
+</body>
 </html>

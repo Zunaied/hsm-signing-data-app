@@ -1,140 +1,76 @@
 console.log("APP JS LOADED");
 
+const statusBox = document.getElementById("statusBox");
+
+function setStatus(msg, ok = true) {
+    console.log("STATUS:", msg);
+
+    statusBox.innerText = msg;
+
+    statusBox.style.border = ok ? "1px solid green" : "1px solid red";
+}
+
+
 /*
-========================================
-WAIT FOR DOM (CRITICAL FIX)
-========================================
+========================
+SIGN
+========================
 */
-document.addEventListener("DOMContentLoaded", () => {
+async function signData() {
 
-    console.log("DOM READY - ATTACHING EVENTS");
+    console.log("SIGN CLICKED");
 
-    const signBtn = document.getElementById("signBtn");
-    const verifyBtn = document.getElementById("verifyBtn");
-    const statusBox = document.getElementById("statusBox");
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
 
-    // Safety check (VERY IMPORTANT)
-    if (!signBtn || !verifyBtn || !statusBox) {
-        console.error("UI ELEMENTS NOT FOUND IN DOM");
-        return;
-    }
-
-    console.log("BUTTONS FOUND:", signBtn, verifyBtn);
-
-    /*
-    ========================================
-    STATUS HANDLER
-    ========================================
-    */
-    function setStatus(message, success = true) {
-
-        console.log("STATUS:", message);
-
-        statusBox.innerText = message;
-
-        statusBox.style.color = success ? "#22c55e" : "#ef4444";
-        statusBox.style.fontWeight = "bold";
-    }
-
-    /*
-    ========================================
-    SIGN REQUEST
-    ========================================
-    */
-    signBtn.addEventListener("click", async () => {
-
-        console.log("SIGN BUTTON CLICKED");
-
-        try {
-
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-
-            if (!name || !email) {
-                setStatus("Name and Email required", false);
-                return;
-            }
-
-            setStatus("Signing data...");
-
-            const response = await fetch("/sign", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({ name, email })
-            });
-
-            console.log("SIGN RESPONSE STATUS:", response.status);
-
-            const data = await response.json();
-
-            console.log("SIGN RESPONSE DATA:", data);
-
-            if (data.signature) {
-                document.getElementById("signature").value = data.signature;
-            }
-
-            setStatus(data.message || "Signed", data.status === "success");
-
-        } catch (err) {
-
-            console.error("SIGN ERROR:", err);
-            setStatus("Sign request failed", false);
-        }
+    const res = await fetch("/sign", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({name, email})
     });
 
-    /*
-    ========================================
-    VERIFY REQUEST
-    ========================================
-    */
-    verifyBtn.addEventListener("click", async () => {
+    const data = await res.json();
 
-        console.log("VERIFY BUTTON CLICKED");
+    console.log("SIGN RESPONSE:", data);
 
-        try {
+    if (data.signature) {
+        document.getElementById("signature").value = data.signature;
+        setStatus("SIGNED SUCCESS");
+    } else {
+        setStatus("SIGN FAILED", false);
+    }
+}
 
-            const name = document.getElementById("name").value.trim();
-            const email = document.getElementById("email").value.trim();
-            const signature = document.getElementById("signature").value.trim();
 
-            if (!name || !email || !signature) {
-                setStatus("All fields required for verify", false);
-                return;
-            }
+/*
+========================
+VERIFY
+========================
+*/
+async function verifyData() {
 
-            setStatus("Verifying signature...");
+    console.log("VERIFY CLICKED");
 
-            const response = await fetch("/verify", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    name,
-                    email,
-                    signature
-                })
-            });
+    const name = document.getElementById("name").value;
+    const email = document.getElementById("email").value;
+    const signature = document.getElementById("signature").value;
 
-            console.log("VERIFY RESPONSE STATUS:", response.status);
-
-            const data = await response.json();
-
-            console.log("VERIFY RESPONSE DATA:", data);
-
-            if (data.status === "success") {
-                setStatus("SIGNATURE VALID ✅", true);
-            } else {
-                setStatus(data.message || "INVALID SIGNATURE ❌", false);
-            }
-
-        } catch (err) {
-
-            console.error("VERIFY ERROR:", err);
-            setStatus("Verify request failed", false);
-        }
+    const res = await fetch("/verify", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({name, email, signature})
     });
 
-});
+    const data = await res.json();
+
+    console.log("VERIFY RESPONSE:", data);
+
+    if (data.status === "success") {
+        setStatus("VALID SIGNATURE");
+    } else {
+        setStatus("INVALID SIGNATURE", false);
+    }
+}
+
+window.signData = signData;
+window.verifyData = verifyData;
