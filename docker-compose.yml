@@ -18,9 +18,9 @@ services:
 
   signing-app:
     build: ./backend
-    container_name: openbao-signing-app
+    container_name: hsm-signing-data-app
     ports:
-      - "8000:8000"
+      - "8001:8000"
     privileged: true
     volumes:
       - ./backend/app/signed:/app/app/signed
