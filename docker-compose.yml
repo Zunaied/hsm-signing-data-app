@@ -1,0 +1,36 @@
+version: '3.9'
+
+services:
+  # postgres:
+  #   image: postgres:16
+  #   container_name: postgres
+
+  #   environment:
+  #     POSTGRES_DB: signingdb
+  #     POSTGRES_USER: signinguser
+  #     POSTGRES_PASSWORD: signingpass
+
+  #   ports:
+  #     - "5432:5432"
+
+  #   volumes:
+  #     - postgres_data:/var/lib/postgresql/data
+
+  signing-app:
+    build: ./backend
+    container_name: openbao-signing-app
+    ports:
+      - "8000:8000"
+    privileged: true
+    volumes:
+      - ./backend/app/signed:/app/app/signed
+      - /usr/lib/x86_64-linux-gnu/softhsm:/usr/lib/x86_64-linux-gnu/softhsm
+      - /etc/openbao:/etc/openbao
+    env_file:
+      - ./backend/.env
+    # environment:
+    #   - PYTHONUNBUFFERED=1
+    # # depends_on:
+    #   - postgres
+# volumes:
+#   postgres_data:

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+
+    <meta
+        name="viewport"
+        content="width=device-width, initial-scale=1.0"
+    >
+
+    <title>OpenBao HSM Signing</title>
+
+    <link
+        rel="stylesheet"
+        href="/static/style.css"
+    >
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1>OpenBao + SoftHSM</h1>
+
+        <div class="card">
+
+            <input
+                type="text"
+                id="name"
+                placeholder="Name"
+            >
+
+            <input
+                type="email"
+                id="email"
+                placeholder="Email"
+            >
+
+            <textarea
+                id="signature"
+                placeholder="Signature"
+            ></textarea>
+
+            <div class="buttons">
+
+                <button id="signBtn">
+                    SIGN
+                </button>
+
+                <button id="verifyBtn">
+                    VERIFY
+                </button>
+
+            </div>
+
+            <div id="statusBox">
+                Waiting...
+            </div>
+
+        </div>
+
+    </div>
+
+    <script src="/static/app.js"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,146 @@
+/* body {
+    background: #0f172a;
+    color: white;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 500px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0px 0px 20px rgba(0,0,0,0.4);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+}
+
+.buttons {
+    display: flex;
+    gap: 20px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+/* #status {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 18px;
+} */
+
+/* #status {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 10px;
+    background: #111827;
+    word-break: break-word;
+    line-height: 1.5;
+} */ 
+
+body {
+    background: #0f172a;
+    color: white;
+    font-family: Arial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    width: 500px;
+}
+
+.card {
+    background: #1e293b;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+input {
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 20px;
+    border-radius: 10px;
+    border: none;
+    font-size: 16px;
+    box-sizing: border-box;
+}
+
+.buttons {
+    display: flex;
+    gap: 15px;
+}
+
+button {
+    flex: 1;
+    padding: 15px;
+    border: none;
+    border-radius: 10px;
+    background: #2563eb;
+    color: white;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+button:hover {
+    background: #1d4ed8;
+}
+
+#status {
+    margin-top: 25px;
+    padding: 15px;
+    border-radius: 10px;
+    min-height: 40px;
+}
+
+.success {
+    background: #14532d;
+    padding: 15px;
+    border-radius: 10px;
+    color: #bbf7d0;
+}
+
+.error {
+    background: #7f1d1d;
+    padding: 15px;
+    border-radius: 10px;
+    color: #fecaca;
+    word-break: break-word;
+}
